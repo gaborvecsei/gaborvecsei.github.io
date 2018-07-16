@@ -26,7 +26,7 @@ layout: page
 
 <h2>References</h2>
 
-The references can be found at[my LinkedIn](https://www.linkedin.com/in/gaborvecsei/)
+The references can be found at [my LinkedIn](https://www.linkedin.com/in/gaborvecsei/)
 
 <ul>
 	<li><i>Ágoston Török - Lead Data Scientist at AGT International</i><p>Gabor is a unique individual because he is able to see the real challenges in complex data science problems. He manages to persevere in the data cleaning, engineering and algorithm optimising tasks even when the tasks are not rewarding in the short term. He is clearly one of the most talented young data scientists I ever interviewed and I was lucky to work with. I can only recommend him to any R&D company.</p></li>
