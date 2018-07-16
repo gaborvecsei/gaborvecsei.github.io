@@ -16,6 +16,10 @@ resume: true
 resume-external: false
 resume-url: resume
 
+asd: true
+asd-external: false
+asd-url: asd
+
 url: https://gaborvecsei.github.io
 # your url: http://USERNAME.github.io
 
