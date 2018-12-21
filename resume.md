@@ -13,36 +13,34 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 ## Work Experience
 
-- *Jun. 2018 - Present* - Meruem Software Ltd. - **Machine Learning Engineer Consultant**
-- *Sep. 2017 - Jul. 2018* - Synetiq Ltd. - **Junior Data Scientist**
-	- Machine Learning
-	- Computer Vision
-	- Data Engineering
-- *Jul. 2016 - Present* - RebotKit - **Co-Founder**
-	- Python Api
-	- Webpage
-	- Android Application
-	- Marketing
-- *Jun. 2016 - Jun 2018* - Meruem Software Ltd. - **Software Developer**
-	- Machine Learning
-	- Computer Vision
-	- Java
-	- Android/IOS Applications
-	- Python
+- **Machine Learning Expert**
+	- Continental
+	- *Aug. 2018 - Present*
+- **Data Scientist**
+	- Synetiq Ltd.
+	- *Sep. 2017 - Jul. 2018*
+- **Co-Founder**
+	- [RebotKit](rebotkit.net)
+	- *Jul. 2016 - Present*
+- **Freelance Machine Learning Expert**
+	- Upwork
+	- *Oct. 2016 - Sep. 2017*
+- **Machine Learning - Computer Vision Expert**
+	- Meruem Software Ltd.
+	- *Jun. 2016 - Jul 2018*
 
 ---
 
 ## Education
 
-- MSc (Masters)
-	- *2017 - Present*
-	- Budapest University of Technology and Economics
+- **MSc (Masters)**
+	- *2017 - 2019*
+	- **Budapest University of Technology and Economics**
 	- Faculty of Electrical Engineering and Informatics
 	- Applied Computer Science Specialization
-	- *(Expected graduation in Jan. 2019)*
-- BSc (Bachelor)
+- **BSc (Bachelor)**
 	- *2013 - 2017*
-	- Budapest University of Technology and Economics
+	- **Budapest University of Technology and Economics**
 	- Faculty of Electrical Engineering and Informatics (Department of Control Engineering and Information Technology)
 	- Autonomous Intelligent Systems Specialization
 	- *(Graduated at 2017)*
@@ -51,9 +49,21 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 ## Languages
 
-- English
+- **English**
 	- Professional working proficiency
-- Spanish
+- **Spanish**
 	- Basic knowledge
-- Italian
+- **Italian**
 	- Basic knowledge
+
+---
+
+## References
+
+The references can be found at [my LinkedIn](https://www.linkedin.com/in/gaborvecsei/)
+
+<ul>
+	<li><i>Ágoston Török - Lead Data Scientist at AGT International</i><p>Gabor is a unique individual because he is able to see the real challenges in complex data science problems. He manages to persevere in the data cleaning, engineering and algorithm optimising tasks even when the tasks are not rewarding in the short term. He is clearly one of the most talented young data scientists I ever interviewed and I was lucky to work with. I can only recommend him to any R&D company.</p></li>
+	<li><i>David Ottlik - CEO at Synetiq</i><p>Gábor proved himself as a smart, fast-learning and always curious data scientist. His kind and proactive attitude and practical machine-learning and computer vision experience made him a valuable team member from day one.</p></li>
+	<li><i>Diego Alonso - Head of Engineering at Synetiq</i><p>Gabor is passionate about his work and can learn very fast. He has a very practical and updated knowledge about machine learning in general and computer vision in particular. He is a good team member and is always available to help others.</p></li>
+</ul>
