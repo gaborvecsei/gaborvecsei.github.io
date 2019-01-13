@@ -51,6 +51,8 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 - **English**
 	- Professional working proficiency
+- **Hungarian**
+	- Native speaker
 - **Spanish**
 	- Basic knowledge
 - **Italian**
