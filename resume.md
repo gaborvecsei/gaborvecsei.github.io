@@ -20,7 +20,7 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 	- Synetiq Ltd.
 	- *Sep. 2017 - Jul. 2018*
 - **Co-Founder**
-	- [RebotKit](rebotkit.net)
+	- [RebotKit](https://rebotkit.net)
 	- *Jul. 2016 - Present*
 - **Freelance Machine Learning Expert**
 	- Upwork
