@@ -31,7 +31,7 @@ That means we can control the class of the generated image based on a input labe
 
 ## Architecture
 
-<img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/cdcgan_abstract_model.png" width="640" alt="Model">
+<img src="https://raw.githubusercontent.com/gaborvecsei/CDCGAN-Keras/master/art/cdcgan_abstract_model.png" width="640" alt="Model">
 
 ### Generator $G(z, c)$
 
@@ -46,8 +46,8 @@ The goal of the discriminator is to decide if the input image with the condition
 
 Generated digits at every epoch:
 
-<img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/mnist_generated_per_epoch.gif" width="640" alt="Generated MNIST Characters">
+<img src="https://raw.githubusercontent.com/gaborvecsei/CDCGAN-Keras/master/art/mnist_generated_per_epoch.gif" width="640" alt="Generated MNIST Characters">
 
 Linear interpolation results:
 
-<img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_2_to_4.gif" width="250" alt="Interpolation animation"><img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_8_to_5.gif" width="250" alt="Interpolation animation"><img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_9_to_6.gif" width="250" alt="Interpolation animation">
+<img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_2_to_4.gif?raw=true" width="250" alt="Interpolation animation"><img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_8_to_5.gif?raw=true" width="250" alt="Interpolation animation"><img src="https://github.com/gaborvecsei/CDCGAN-Keras/blob/master/art/interpolation_9_to_6.gif?raw=true" width="250" alt="Interpolation animation">
