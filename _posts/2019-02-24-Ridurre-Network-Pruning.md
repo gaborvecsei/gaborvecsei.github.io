@@ -1,6 +1,6 @@
 ---
-title: "Ridurre - Convolutional Filter Pruning Framework"
-subtitle: "Ridurre - Convolutional Filter Pruning Framework"
+title: "Ridurre - Convolutional Filter Pruning"
+subtitle: "Ridurre - Convolutional Filter Pruning"
 layout: post
 date: 2019-02-24 00:00
 tag:
@@ -12,7 +12,7 @@ image: ../assets/posts/nonexistent.png
 headerImage: false
 projects: true
 hidden: true
-description: "Convolutional Filter Pruning Framework"
+description: "Convolutional Filter Pruning"
 category: project
 author: gaborvecsei
 externalLink: false
@@ -20,7 +20,7 @@ externalLink: false
 
 Pruning is the process when we try to shrink a network by removing the redundant and "not so significant" filters.
 
-The **Ridurre**[https://github.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras] package is a mini-framework which you can
+The [**Ridurre**](https://github.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras) package is a mini-framework which you can
 easily use on your existing *Keras* models, and also you can define your own pruning methods without any struggle.
 
 The use of the package can be visualized in the following way:
@@ -54,7 +54,7 @@ in a layer from least to most important. I would like to summarize my favourite 
 We just define a pruning factor and randomly choose one (or few) filters which we can "delete".
 $\text{Number of Filters to Prune} = |\text{filters}| * \text{pruning factor}$.
 This can look like a waste of time but actually it is worth the try as it is a real competition to other methods *[1]*. [*Implementation*](https://github.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras/blob/master/ridurre/random_pruning.py)
-- *KMeans Pruning* - We can take all the filters in a convolutional layer and use unsupervised clustering again, with some
+- *KMeans Pruning* - We can take all the filters in a convolutional layer and use unsupervised clustering, again with some
 pruning factor. Now we can define a number of clusters, and for every cluster centroid we will keep the closes data point, which
 is a filter. The intuition behind this method, is that we "compress" the knowledge with keeping the most representative one
 and deleting the others in a cluster. [*Implementation*](https://github.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras/blob/master/ridurre/kmeans_pruning.py)
@@ -75,6 +75,16 @@ With that being said I will let the plots do the talking for me. This case study
 
 <img src="https://raw.githubusercontent.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras/master/art/pruning.png" width="640" alt="">
 
+As we can see the train and validation accuracy dropped at the end of the pruning, but by just a little in contrast with the parameter loss.
+Initially we had $220.000$ parameters which was reduced below $80.000$ which means almost $64%$ reduction. Also it is worth saying that this
+example is a pretty aggressive pruning as we remove filters from every layer with $\text{clustering factor} = 0.9$. So at the end of the pruning
+our first few layers will have $10$ filters instead of the original $16$.
+
+A more sufficient process would be to freeze the first few layers and have a soft pruning factor. That way we could have shorter fine-tunings and
+the model could stay more accurate, but of course it would take more time to prune.
+
+I hope you enjoyed this project and you will use or at least try
+out the [*Ridurre*](https://github.com/gaborvecsei/Ridurre-Network-Filter-Pruning-Keras) package.
 
 ## References
 
