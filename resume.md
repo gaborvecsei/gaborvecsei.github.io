@@ -15,7 +15,7 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 - **Machine Learning Expert**
 	- Continental
-	- *Aug. 2018 - Present*
+	- *Aug. 2018 - Feb. 2020*
 - **Data Scientist**
 	- Synetiq Ltd.
 	- *Sep. 2017 - Jul. 2018*
