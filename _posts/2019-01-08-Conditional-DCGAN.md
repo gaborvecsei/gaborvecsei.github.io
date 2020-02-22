@@ -11,7 +11,6 @@ tag:
   - gan
 image: ../assets/posts/nonexistent.png
 headerImage: false
-hidden: true # don't count this post in blog pagination
 description: "Conditional Deep Convolutional GAN Keras Implementation"
 category: blog
 author: gaborvecsei

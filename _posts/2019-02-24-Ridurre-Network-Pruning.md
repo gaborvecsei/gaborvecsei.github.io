@@ -10,7 +10,6 @@ tag:
   - pruning
 image: ../assets/posts/nonexistent.png
 headerImage: false
-hidden: true
 description: "Convolutional Filter Pruning"
 category: blog
 author: gaborvecsei
