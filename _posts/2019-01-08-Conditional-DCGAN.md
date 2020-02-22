@@ -4,17 +4,16 @@ subtitle: "Conditional Deep Convolutional GAN Keras Implementation"
 layout: post
 date: 2019-01-08 00:00
 tag:
-  - Python
-  - Keras
-  - Deep Learning
-  - Machine Learning
-  - GAN
+  - python
+  - keras
+  - deep learning
+  - machine learning
+  - gan
 image: ../assets/posts/nonexistent.png
 headerImage: false
-projects: true
 hidden: true # don't count this post in blog pagination
 description: "Conditional Deep Convolutional GAN Keras Implementation"
-category: project
+category: blog
 author: gaborvecsei
 externalLink: false
 ---

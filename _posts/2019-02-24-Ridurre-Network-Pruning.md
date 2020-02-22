@@ -4,16 +4,15 @@ subtitle: "Ridurre - Convolutional Filter Pruning"
 layout: post
 date: 2019-02-24 00:00
 tag:
-  - Keras
-  - Deep Learning
-  - Machine Learning
-  - Pruning
+  - keras
+  - deep learning
+  - machine learning
+  - pruning
 image: ../assets/posts/nonexistent.png
 headerImage: false
-projects: true
 hidden: true
 description: "Convolutional Filter Pruning"
-category: project
+category: blog
 author: gaborvecsei
 externalLink: false
 ---
