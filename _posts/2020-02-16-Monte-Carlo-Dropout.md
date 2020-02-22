@@ -2,17 +2,16 @@
 title: "Playing with Monte-Carlo dropout for uncertainty estimation"
 subtitle: ""
 layout: post
-date: 2020-02-16 00:00
+date: 2020-02-24 00:00
 tag:
   - Deep Learning
   - Machine Learning
   - Variational inference
 image: ../assets/posts/nonexistent.png
 headerImage: false
-projects: true
-hidden: true
+projects: false
 description: "Playing with Monte-Carlo dropout for uncertainty estimation"
-category: project
+category: blog
 author: gaborvecsei
 externalLink: false
 ---
@@ -35,7 +34,7 @@ Take a model with dropout layers and then activate those at inference time also,
 
 I trained a model which contains dropout after every convolutional and fully connected layer but the last one which provides the outputs.
 
-<img src="https://raw.githubusercontent.com/gaborvecsei/CDCGAN-Keras/master/art/cdcgan_abstract_model.png" width="640" alt="Model">
+<img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/model.png" alt="Model">
 
 For the data I choose the [MNIST](http://yann.lecun.com/exdb/mnist/) dataset without any augmentation and trained my network.
 
@@ -51,20 +50,23 @@ I choose a random image and then transformed it throuh multiple iterations to se
 
 In the following experiment a random image with the label $1$ was selected and then rotated with $10$ degrees at each step.
 
-<img src="https://raw.githubusercontent.com/gaborvecsei/CDCGAN-Keras/master/art/cdcgan_abstract_model.png" width="640" alt="Model">
+<img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/rotation/combined.png" alt="Rotation experiment">
 
 The same experiment with a "MC Dropout free" model, would produce only the top softmax value plot. This is problematic as with a carelessly selected softmax threshold (let's say with $0.5$) we can introduce false detections when it would be much better to say "I don't know". (The plot above illustrates this at steps 10, 11, 12, 13, 28, 29, 30).
 
 With the knowledge of the other metrics we can see our model is uncertain because it has high variance at those regions.
 
+<img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/rotation/rotation.gif" alt="Rotation experiment gif">
 
 ### Blending
 
 2 random images are selected and we start to blend them. I would expect that as more and more becomes visible from the second image the more uncertain my model will be. Fortunately this is exactly what happened.
 
-<img src="https://raw.githubusercontent.com/gaborvecsei/CDCGAN-Keras/master/art/cdcgan_abstract_model.png" width="640" alt="Model">
+<img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/blending/combined.png" alt="Blending experiment">
 
 Our model always predicted the correct label for the image, but the entropy and variance increased over the steps. Around step 15 as a human I would not be confident what is the correct label and this is exactly what we achieved with the MC Dropout.
+
+<img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/blending/blending.gif" alt="Blending experiment gif">
 
 ## Conclusion
 
