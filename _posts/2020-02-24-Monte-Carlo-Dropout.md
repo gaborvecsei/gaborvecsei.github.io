@@ -36,7 +36,9 @@ I can hear your thoughts - "but what is uncertainty? Standard deviation $0.5$?, 
 
 # Experiments
 
-I created a model which contains dropout after every convolutional and fully connected layer but the last one which provides the outputs.
+I created a model which contains spatial dropout after every convolutional and a simple dropout after every fully connected layer but the last one which provides the outputs.
+
+Spatial dropout is needed as I work with a convolutional network and masking single connections is not effective as it does not remove enough semantic information. But masking whole feature maps (or regions) can force the network to learn from remaining maps. This produces a more diverse set of features *[4]*.
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/model.png" alt="Model">
 
@@ -89,3 +91,5 @@ Overall this is an interesting and lightweight approach to estimate prediction u
 *[2]* - [Single-Model Uncertainties for Deep Learning, *2018*](https://arxiv.org/abs/1811.00908)
 
 *[3]* - [Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning, *2015*](https://arxiv.org/abs/1506.02142)
+
+*[4]* - [Confidence Calibration for Convolutional Neural Networks Using Structured Dropout ,*2019*](https://arxiv.org/abs/1906.09551)
