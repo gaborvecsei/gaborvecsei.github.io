@@ -50,7 +50,10 @@ tf.keras.layers.Dropout(0.5)(x, training=True)
 
 For the data I choose the [MNIST](http://yann.lecun.com/exdb/mnist/) dataset without any augmentation and then trained my network.
 
-For every experiment I choose a random image from the test set and then transformed it through multiple iterations to see how the prediction and uncertainty varies. Every transformation step the image is fed to the network $1000$ times, then I calculate the softmax score mean, variance and entropy.
+For every experiment I choose a random image from the test set and then transformed it through multiple iterations to see how the prediction and uncertainty varies. Every transformation step the image is fed to the network $N=1000$ times, then I calculate the softmax score mean, variance and entropy.
+
+- Variance: $\sigma^2=\frac{\sum_n(x_n-\mu)^2}{N}$
+- Entropy: $H \approx - \sum_c^{C}(\mu_c)log(\mu_c)$ where $\mu_c=\frac{1}{N}\sum_n p_c^n$ is the class-wise mean softmax score
 
 ## Rotation
 
@@ -60,19 +63,19 @@ The same experiment with an "MC Dropout free" model, would produce only the top 
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/rotation/combined.png" alt="Rotation experiment">
 
-On the following animation you can see the histogram of the collected softmax outputs (from $1000$ inferences) for the different classes. Red marks the true label, and the highlighted histogram is for the class which is the prediction (`np.argmax(np.mean(softmax_outputs, axis=0))`) of the model at that step.
+On the following animation you can see the histogram of the collected softmax outputs (from $N=1000$ inferences) for the different classes. Red marks the true label, and the highlighted histogram is for the class which is the prediction (`np.argmax(np.mean(softmax_outputs, axis=0))`) of the model at that step.
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/rotation/rotation.gif" alt="Rotation experiment gif">
 
 ## Blending
 
-2 images are selected and we start to blend them: $combined_n = image1 + \alpha_n image2$ where $\alpha \in [0,1]$ and $n = 0...N$. In our case the label $4$ is the "dominant" number and the $1$ fades in, which is rather interesting as the location of the 1 is almost at the stem of the $4$. I think because of this phenomenon our model correctly predicts the label all along (the softmax values, drops from $~0.95$ to only $~0.7$), but with an increasing uncertainty.
+2 images are selected and we start to blend them: $combined_n = image1 + \alpha_n image2$ where $\alpha \in [0,1]$ and $n = 0...N$. In our case the label $4$ is the "dominant" number and the $1$ fades in, which is rather interesting as the location of the $1$ is almost at the stem of the $4$. I think because of this phenomenon our model correctly predicts the label all along (the softmax values, drops from $~0.95$ to only $~0.7$), but with an increasing uncertainty.
 
 As a human around step 15 I would not be confident to label the image as a $4$.
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/blending/combined.png" alt="Blending experiment">
 
-Also on the animation we can see how the bins for the $4$ start to fill up as the $\alpha$ value increases and the $image2$ becomes more dominant.
+Also on the animation we can see how the bins for the $4$ start to fill up as the $\alpha$ value increases and the $image2$ becomes more dominant and the network becomes more uncertain.
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/mc_dropout/blending/blending.gif" alt="Blending experiment gif">
 
