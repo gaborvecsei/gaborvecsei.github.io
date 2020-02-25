@@ -7,7 +7,7 @@ tag:
   - Deep Learning
   - Machine Learning
   - Variational inference
-image: ../assets/images/blog/mc_dropout/rotation.gif
+image: ../assets/images/blog/mc_dropout/rotation/rotation.gif
 headerImage: false
 projects: false
 description: "Experiments with Monte-Carlo dropout for uncertainty estimation"
