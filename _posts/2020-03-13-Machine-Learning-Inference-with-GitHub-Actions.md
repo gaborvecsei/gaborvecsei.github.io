@@ -8,6 +8,7 @@ tag:
   - Deployment
   - GitHub
   - CI/CD
+image: https://gaborvecsei.github.io/assets/images/blog/ml_github_actions/issue_comment_prediction.png
 headerImage: false
 projects: false
 description: "This post demonstrated how you can use GitHub Actions to perform inference with your ML models inside GitHub"
