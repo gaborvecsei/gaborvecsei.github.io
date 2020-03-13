@@ -36,30 +36,7 @@ In a **workflow** we will find **steps** and for certain steps **we can create i
 
 As a first step we should create our action in the root folder named `action.yaml`. In this we can describe the *inputs*, *outputs* and the environment.
 
-```
-name: 'Prediction GitHub Action Test'
-description: 'This is a sample with which you can run inference on a ML model with a toy dataset'
-inputs:
-  issue_comment_body:
-    required: true
-    description: 'This is the Github issue comment message'
-  issue_number:
-     required: true
-     description: 'Number of the Github issue'
-  issue_user:
-      required: true
-      description: 'This user send the comment'
-outputs:
-  issue_comment_reply:
-    description: 'Reply to the request'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.issue_comment_body }}
-    - ${{ inputs.issue_number }}
-    - ${{ inputs.issue_user }}
-```
+{% gist gaborvecsei/45a7a0a1c681d23370d233fb26ebeaf2 %}
 
 You can see the 3 inputs and a single output. Also the `runs` key describes the environment where our code will run. This is a Docker container for which the inputs will be passed as arguments. Therefore the entry point of the container should accept these 3 arguments in the defined order. This Docker image is described here: [Dockerfile](https://github.com/gaborvecsei/Machine-Learning-Inference-With-GitHub-Actions/blob/master/Dockerfile). When we run the container it launches the `entrypoint.sh` script.
 
@@ -90,36 +67,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 An action can not be used without a workflow. That defines the different steps you would like to take in your pipeline. You can find it at [`.github/workflows/main.yaml`](https://github.com/gaborvecsei/Machine-Learning-Inference-With-GitHub-Actions/blob/master/.github/workflows/main.yaml).
 
-```
-name: Demo
-on: [issue_comment]
-
-jobs:
-    my_first_job:
-        runs-on: ubuntu-latest
-        name: Just a simple demo job
-        steps:
-            - name: Checkout
-              uses: actions/checkout@master
-            - name: See full payload (for debugging)
-              env:
-                  PAYLOAD: ${{ toJSON(github.event) }}
-              run: echo "FULL PAYLOAD:\n${PAYLOAD}\n"
-            - name: Run the container and make a prediction
-              if: startsWith(github.event.comment.body, '/predict')
-              uses: ./
-              id: make_prediction
-              with:
-                  issue_comment_body: ${{ github.event.comment.body }}
-                  issue_number: ${{ github.event.issue.number }}
-                  issue_user: ${{ github.event.comment.user.login }}
-            - name: Print the output from the container(for debugging)
-              run: echo "The reply message is ${{steps.make_prediction.outputs.issue_comment_reply}}"
-            - name: Send reply to issue for user
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: bash issue_comment.sh "${{steps.make_prediction.outputs.issue_comment_reply}}" "${{ github.event.issue.number }}"
-```
+{% gist gaborvecsei/c57a7fe8e16cdc645d01d96366d743dc %}
 
 First of all `on: [issue_comment]` defines that I would like to trigger this flow when an issue receives a comment (from anyone). Then in my job I define the VM type with `runs-on: ubuntu-latest`. Now comes the interesting part, the steps which I mentioned before.
 
