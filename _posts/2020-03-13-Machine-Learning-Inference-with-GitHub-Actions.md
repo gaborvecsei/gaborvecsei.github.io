@@ -27,7 +27,7 @@ GitHub Actions is an automation tool for building, testing, deployment. Quick ex
 
 A new GitHub repo will be created where we store the code which trains and performs inference for a machine learning model. I wanted to be super hardcore, so I chose the [Iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and a [Random Forest Classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html). This classifier is trained so it can identify flowers based on the sepal and petal lengths and widths. The model training can be found [here](https://github.com/gaborvecsei/Machine-Learning-Inference-With-GitHub-Actions/blob/master/train_model.ipynb) (I'll leave this explanation out as there is nothing interesting about it). The notebook produces a model file which will be used for the predictions. The GitHub Actions workflow is triggered when an issue receives a comment. If the comment contains the `/predict` prefix, then we start to parse the comment, then we make a prediction and construct a reply. As the final step this message is sent back to the user by a bot. To make it better, this whole thing runs inside a Docker container.
 
-<img src="art/issue_comment_prediction.png" alt="sample comment prediction">
+<img src="https://gaborvecsei.github.io/assets/images/blog/ml_github_actions/issue_comment_prediction.png" alt="sample comment prediction">
 
 In a **workflow** we will find **steps** and for certain steps **we can create individual actions**. One workflow can contain multiple actions, but in this project we will use only 1.
 
@@ -35,7 +35,7 @@ In a **workflow** we will find **steps** and for certain steps **we can create i
 
 As a first step we should create our action in the root folder named `action.yaml`. In this we can describe the *inputs*, *outputs* and the environment.
 
-```python
+```
 name: 'Prediction GitHub Action Test'
 description: 'This is a sample with which you can run inference on a ML model with a toy dataset'
 inputs:
@@ -85,11 +85,11 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Define the Workflow
 
-<img src="art/job_steps.png" alt="job steps">
+<img src="https://gaborvecsei.github.io/assets/images/blog/ml_github_actions/job_steps.png" alt="job steps">
 
 An action can not be used without a workflow. That defines the different steps you would like to take in your pipeline. You can find it at [`.github/workflows/main.yaml`](https://github.com/gaborvecsei/Machine-Learning-Inference-With-GitHub-Actions/blob/master/.github/workflows/main.yaml).
 
-```python
+```
 name: Demo
 on: [issue_comment]
 
