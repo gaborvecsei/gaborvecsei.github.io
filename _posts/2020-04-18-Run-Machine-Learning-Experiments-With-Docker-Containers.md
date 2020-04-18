@@ -1,5 +1,5 @@
 ---
-title: "Run Machine Learning experiments with Docker containers"
+title: "Run Machine Learning Experiments with Docker Containers"
 subtitle: ""
 layout: post
 date: 2020-04-18 00:00
