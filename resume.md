@@ -13,6 +13,10 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 ## Work Experience
 
+- **Lead of Artificial Intelligence**
+	- Docker Holding
+	- *Feb. 2020 - Present*
+	- *Budapest*
 - **Machine Learning Expert**
 	- Continental
 	- *Aug. 2018 - Feb. 2020*
