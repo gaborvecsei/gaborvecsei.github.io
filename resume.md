@@ -40,12 +40,12 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 - **Master of Science (MSc)**
 	- *2017 - 2019*
 	- **Budapest University of Technology and Economics**
-	- Faculty of Electrical Engineering and Informatics (Department of Automation and Applied Informatics)
+	- Faculty of Computer Science & Engineering (Department of Automation and Applied Informatics)
 	- Applied Computer Science Specialization
 - **Bachelor of Science (BSc)**
 	- *2013 - 2017*
 	- **Budapest University of Technology and Economics**
-	- Faculty of Electrical Engineering and Informatics (Department of Control Engineering and Information Technology)
+	- Faculty of Computer Science & Engineering (Department of Control Engineering and Information Technology)
 	- Autonomous Intelligent Systems Specialization
 
 ---
