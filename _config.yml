@@ -104,3 +104,5 @@ plugins:
 
 jekyll-mentions:
     base_url: ''
+
+theme: jekyll-theme-cayman
