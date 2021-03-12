@@ -1,5 +1,5 @@
 ---
-title: "Stock Pattern Analyzer - Similarity Matching"
+title: "Finding patterns in stock data with similarity matching - Stock Pattern Analyzer"
 subtitle: "Find similar patterns in historical stock data"
 layout: post
 date: 2021-03-01 00:00
