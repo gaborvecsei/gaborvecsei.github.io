@@ -7,8 +7,8 @@ tag:
   - Stocks
   - Optimization
   - Python
-image: ../assets/images/stock_analyzer/stock_analyzer_image.png
-headerImage: true
+image:
+headerImage: false
 description: ""
 category: blog
 author: gaborvecsei
@@ -32,7 +32,7 @@ $M$ days), then it can give me a hint on how the selected stock will move in the
 For example, I can observer the top $k$ matches, and then a majority vote could decide,
 if a bullish or bearish period will come. 
 
-<img src="https://www.newtraderu.com/wp-content/uploads/2020/06/Trading-Patterns-Cheat-Sheet.jpg" alt="stock patterns">
+<img src="https://www.newtraderu.com/wp-content/uploads/2020/06/Trading-Patterns-Cheat-Sheet.jpg" alt="stock patterns" width=300>
 
 *(Source: [1])* 
 
@@ -110,6 +110,8 @@ Now that we have the search models, we can build the whole tool. There are 2 dif
     - I had to use this to quickly create a shiny frontend (I am more of a backend guy 😉) but ideally this
     should be a React frontend which is responsive and looks much better
 
+<img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=640>
+
 ## RestAPI
 
 When we start the stock-API, a bunch of stocks (S&P500 and a few additional ones) are downloaded, prepared,
@@ -161,24 +163,6 @@ I would go with Reach, Angular or any other alternative.
       <th>20</th>
       <th>50</th>
       <th>100</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -260,7 +244,7 @@ My only advice:
 # Code
 
 You can find the code in my [Stock Pattern Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
-- https://github.com/gaborvecsei/Stocks-Pattern-Analyzer
+- [https://github.com/gaborvecsei/Stocks-Pattern-Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer)
 
 # References
 
