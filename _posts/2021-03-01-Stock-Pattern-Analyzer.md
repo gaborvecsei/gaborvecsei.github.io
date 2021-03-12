@@ -8,7 +8,7 @@ tag:
   - Optimization
   - Python
 image: ../assets/images/stock_analyzer/stock_analyzer_image.png
-headerImage: false
+headerImage: true
 description: ""
 category: blog
 author: gaborvecsei
@@ -33,7 +33,8 @@ For example, I can observer the top $k$ matches, and then a majority vote could 
 if a bullish or bearish period will come. 
 
 <img src="https://www.newtraderu.com/wp-content/uploads/2020/06/Trading-Patterns-Cheat-Sheet.jpg" alt="stock patterns">
-(*[1]*) 
+
+*(Source: [1])* 
 
 # Search Engine
 
