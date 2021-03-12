@@ -138,6 +138,7 @@ I would go with Reach, Angular or any other alternative.
 
 # Measurement results
 
+<div style="overflow-x: auto;">
 <table border="1" class="dataframe">
   <thead>
     <tr>
@@ -222,6 +223,7 @@ I would go with Reach, Angular or any other alternative.
     </tr>
   </tbody>
 </table>
+</div>
 
 - *RAM allocation measurements are over-approximations*
     - *Search object is serialized then the size of the file is reported here*
