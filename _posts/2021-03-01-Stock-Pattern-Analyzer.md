@@ -29,7 +29,7 @@ In this pet-project I wanted to create a tool with which we can directly explore
 in $N$ series given a $q$ query. The idea was that, if I look at the last $M$ trading days for a selected stock, and
 I find the most similar matches from the other $N$ stocks where I also know the "future" values (which comes after the
 $M$ days), then it can give me a hint on how the selected stock will move in the future.
-For example, I can observer the top $k$ matches, and then a majority vote could decide,
+For example, I can observe the top $k$ matches, and then a majority vote could decide,
 if a bullish or bearish period will come. 
 
 <img src="https://www.newtraderu.com/wp-content/uploads/2020/06/Trading-Patterns-Cheat-Sheet.jpg" alt="stock patterns" width=300>
@@ -39,7 +39,7 @@ if a bullish or bearish period will come.
 # Search Engine
 
 The approach would be quite simple if we would't care about runtime.
-Just imagine a sliding window over all stocks which you select, then a calculation of some distance metric and bummm,
+Just imagine a sliding window over all stocks which you select, then a calculation of some distance metric and bummm 💥,
 you have the closest matches.
 **But we want better than that**, as even a 1 second response time can be depressing for an end user.
 Let's get to how it can be "optimized".
@@ -58,7 +58,7 @@ You can quantize your data and by that you can reduce the memory footprint of th
 Of course the price is that this is an approximate solution *[2]*, but still, you will get satisfying results.
 At least this was the case in this stock similarity search project.
 
-You can see the comparison at the measurements.
+You can see the comparison of the different solutions at the measurements section.
 
 ## Window extraction
 
@@ -74,7 +74,7 @@ extracted_windows = values[window_indices]
 
 Now that we have the extracted windows we can build the search model.
 But wait... It's sounds great that we have the windows, but we actually don't care about the "real 💲💲💲 values" for a
-given window. We are interested in the patterns, the ups 📈 and downs 📉🦧.
+given window. We are interested in the patterns, the ups 📈🦧 and downs 📉.
 We can solve this by min-max scaling the values for each window (this is also vectorized).
 This way we can directly compare the patterns in them.
 
@@ -101,40 +101,6 @@ top_k_distances, top_k_indices = model.query(x=query_values, k=5)
 ```
 
 The query speed of the models can be found in the measurement table below.
-
-# The tool
-
-Now that we have the search models, we can build the whole tool. There are 2 different parts:
-- RestAPI (FastAPI) - *as the backend* - this allows us to search in the stocks
-- Dash client app - *as the frontend*
-    - I had to use this to quickly create a shiny frontend (I am more of a backend guy 😉) but ideally this
-    should be a React frontend which is responsive and looks much better
-
-<img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=640>
-
-## RestAPI
-
-When we start the stock-API, a bunch of stocks (S&P500 and a few additional ones) are downloaded, prepared,
-and then we start to build the above mentioned search models.
-For each length we would like to investigate, a new model gets created with the appropriate dimensions.
-To speed up the process, we can download and create the models in parallel (with `concurrent.futures`).
-
-For the simplicity of this tool, 2X a day (because of the different markets) a background scheduled process
-updates both the stock data and then the search models.
-In a more advanced (not MVP) version you would only need to download the last values for each stock after market close,
-create an extra sliding window which contains the new values and then add it to the search model.
-This would save you bandwidth and some CPU power.
-In my code, I just re-download everything and re-build the search models 😅. 
-
-After starting the script, the endpoints are visible at `localhost:8001/docs`.
-
-## Client Dash app
-
-I really can't say anything interesting about this, I tried to keep the code at minimum while the site
-is usable and looks pretty (as long as you are using a desktop).
-
-Dash is perfect to quickly create frontends, if you know how to use `plotly`, but for a "real" app as I mentioned
-I would go with Reach, Angular or any other alternative.
 
 # Measurement results
 
@@ -231,6 +197,40 @@ I would go with Reach, Angular or any other alternative.
 - *No GPUs were used, all calculations are made on CPUs*
 - *Query speed is measured as the average of 10 queries with the given model*
 
+# The tool
+
+Now that we have the search models, we can build the whole tool. There are 2 different parts:
+- RestAPI (FastAPI) - *as the backend* - this allows us to search in the stocks
+- Dash client app - *as the frontend*
+    - I had to use this to quickly create a shiny frontend (I am more of a backend guy 😉) but ideally this
+    should be a React frontend which is responsive and looks much better
+
+<img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=640>
+
+## RestAPI
+
+When we start the stock-API, a bunch of stocks (S&P500 and a few additional ones) are downloaded, prepared,
+and then we start to build the above mentioned search models.
+For each length we would like to investigate, a new model gets created with the appropriate dimensions.
+To speed up the process, we can download and create the models in parallel (with `concurrent.futures`).
+
+For the simplicity of this tool, 2X a day (because of the different markets) a background scheduled process
+updates both the stock data and then the search models.
+In a more advanced (not MVP) version you would only need to download the last values for each stock after market close,
+create an extra sliding window which contains the new values and then add it to the search model.
+This would save you bandwidth and some CPU power.
+In my code, I just re-download everything and re-build the search models 😅. 
+
+After starting the script, the endpoints are visible at `localhost:8001/docs`.
+
+## Client Dash app
+
+I really can't say anything interesting about this, I tried to keep the code at minimum while the site
+is usable and looks pretty (as long as you are using a desktop).
+
+Dash is perfect to quickly create frontends if you know how to use `plotly`, but for a production scale app as I mentioned
+I would go with Reach, Angular or any other alternative.
+
 # Making trading decisions based on the patters
 
 **Please just don't.** I mean it is really fun to look at the graphs and check what are the most similar
@@ -238,7 +238,7 @@ stocks out there and what patterns can you find, but let's be honest:
 
 > **This will only fuel your confirmation bias**.
 
-A weighted ensamble of different forecasting techniques would be a go-to method 🤫.
+A weighted ensamble of different forecasting techniques would be my first go-to method 🤫.
 
 My only advice:
 **Hold** 💎👐💎👐 
@@ -246,7 +246,7 @@ My only advice:
 # Demo & Code
 
 You can find a [Demo](https://stock-dash-client.herokuapp.com/), which is deployed to Heroku. Maybe you'll need to wait a few minutes befor the page "wakes up".
-- https://stock-dash-client.herokuapp.com/
+- [https://stock-dash-client.herokuapp.com](https://stock-dash-client.herokuapp.com)
 
 You can find the code in my [Stock Pattern Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
 - [https://github.com/gaborvecsei/Stocks-Pattern-Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer)
