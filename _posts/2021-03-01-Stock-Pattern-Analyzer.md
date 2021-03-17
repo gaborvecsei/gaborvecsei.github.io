@@ -15,6 +15,8 @@ author: gaborvecsei
 externalLink: false
 ---
 
+<img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=1 height=1>
+
 In financial (or almost any type of) forecasting we build models which learn the patterns of the given series.
 Partially this can be done because the investors and traders tend to make the same choices they did in the past, 
 as they follow the same analysis techniques and their objective rules (e.g.: if a given stock drop below $x$,
