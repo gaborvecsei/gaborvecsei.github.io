@@ -7,7 +7,7 @@ tag:
   - Stocks
   - Optimization
   - Python
-image:
+image: ../assets/images/stock_analyzer/stock_analyzer_image.png
 headerImage: false
 description: ""
 category: blog
