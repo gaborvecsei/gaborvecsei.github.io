@@ -243,9 +243,12 @@ A weighted ensamble of different forecasting techniques would be a go-to method 
 My only advice:
 **Hold** 💎👐💎👐 
 
-# Code
+# Demo & Code
 
-You can find the code in my [Stock Pattern Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
+You can find a [**Demo**](https://stock-dash-client.herokuapp.com/), which is deployed to Heroku. Maybe you'll need to wait a few minutes befor the page "wakes up".
+- https://stock-dash-client.herokuapp.com/
+
+You can find the code in my [**Stock Pattern Analyzer**](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
 - [https://github.com/gaborvecsei/Stocks-Pattern-Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer)
 
 # References
