@@ -245,10 +245,10 @@ My only advice:
 
 # Demo & Code
 
-You can find a [**Demo**](https://stock-dash-client.herokuapp.com/), which is deployed to Heroku. Maybe you'll need to wait a few minutes befor the page "wakes up".
+You can find a [Demo](https://stock-dash-client.herokuapp.com/), which is deployed to Heroku. Maybe you'll need to wait a few minutes befor the page "wakes up".
 - https://stock-dash-client.herokuapp.com/
 
-You can find the code in my [**Stock Pattern Analyzer**](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
+You can find the code in my [Stock Pattern Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer) GitHub repo:
 - [https://github.com/gaborvecsei/Stocks-Pattern-Analyzer](https://github.com/gaborvecsei/Stocks-Pattern-Analyzer)
 
 # References
@@ -270,3 +270,5 @@ You can find the code in my [**Stock Pattern Analyzer**](https://github.com/gabo
 [8] [Algo Trading Dominates 80% Of Stock Market](https://seekingalpha.com/article/4230982-algo-trading-dominates-80-of-stock-market)
 
 [9] [Algorithmic trading - Wikipedia](https://en.wikipedia.org/wiki/Algorithmic_trading)
+
+🚀🚀🌑
