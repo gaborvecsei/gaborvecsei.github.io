@@ -76,22 +76,74 @@ This is all achieved with *GitHub Actions*. Without going into the details it's 
 
 # Backtesting
 
-Now as everything is covered, what is the goal, how we got the data, we can start to look into the backtesting and
+As everything is covered, what is the goal, how we got the data, we can start to look into the backtesting and
 the results.
 
-For the backtesting I used the `backtesting.py` *[5]* package (The `backtrader` is just as good, before anyone asks it)
-and `yfinance` with which I got the historical stock data.
+For the backtesting I used the `backtesting.py` *[5]* package (The `backtrader` is just as good)
+and `yfinance` *[6]* with which I got the historical stock data.
 
-For the simulations, each mentioned stock is tested individually, then the overall results are gathered.
+For the simulations, each mentioned stock is tested individually, then the overall results are calculated.
 (We also store the individual results in a html file.)
 I have a predefined amount which I would invest in a stock. This stays the same no matter the price, as we want to
-spend equally as we don't know how th stock will perform.
-At each buy we go all in and buy as meny positions as we can with the money. Once we sell, then we sell all of it.
+spend equally as we don't know how the stock will perform.
+At each buy recommendation we go "all in" and buy as many positions as we can with the money. Once we sell, then we sell all of it.
 The buy and sell dates are defined in the backtesting classes, and they are "calculated" from the recommendation dates.
 This is repeated if a company was mentioned more times.
 
+(Also, a commissing is set: $2%$.)
 
+## Challenges
 
+Before I show the results, I would like to write a bit about the challenges. These are important factors as all of
+them can alter the results at the end.
+
+Fortunately if you have better data, then it is easily curable.
+
+### After hours data
+
+This is one of the biggest problems 😢 as we literally don't have it. It's a bit of an over exaggeration,
+as `Yfinance` can provide it but it is sparse. I "solved" this by stating that the price at showtime is the same as
+it is at market close. Of course this way we cannot test with high accuracy the "after the show" after-hours volatility.
+
+If you have (maybe a paid) data resource, then by adjusting the buy/sell date calculations, you can easily adapt the
+strategies to a propre after-hours trading session which would provide the accurate results for the Cramer effect.
+
+### Missing days
+
+There are a few days for each stock, where we have missing data. There is a function with which you can transform them.
+Either you drop it, or use the next "closest" date.
+
+Dropping would mean, that we won't buy/sell on the date at all, while using the closest date could result in lower
+accuracy in returns, as that is also an approximation. Btw. if in the real-life scenario we would not stirictly follow
+the buy patterns, and would buy max 1 business day later, than that would match with this approximation.
+
+## Trading Strategies
+
+Multiple trading strategies are implemented to test the Cramer effect and his "portfolio":
+- A) *BuyAndHold* (and repeat)
+  - The stocks are bought at the first mention on the show, then held for $N$ days. On the $N$th day the positions are 
+  closed. If there were other mentions after we sold, we repeat this process
+- B) *AfterShowBuyNextDayCloseSell*
+  - We buy the mentioned stocks at the end of the show and then sell on the next day at market Close
+- C) *AfterShowBuyNextDayOpenSell*
+  - We buy the mentioned stocks at the end of the show and then sell on the next day at market Open
+- D) *NextDayOpenBuyNextDayCloseSell*
+  - We buy the mentioned stocks at next day market open and then sell it on the same day at market close
+
+The Cramer-effect is simulated with strategies *B, C* and *D*, as we are aiming for the short-term effect.
+Stretegy *D* is the one, where no after-hours trading is involved.
+
+## Results
+
+### Buy and Hold
+
+TODO
+
+### Cramer Effect
+
+TODO
+
+# Conclustion
 
 # References
 
@@ -104,5 +156,7 @@ This is repeated if a company was mentioned more times.
 [4] [The Cramer Effect](https://www.investopedia.com/terms/c/cramerbounce.asp#:~:text=The%20Cramer%20bounce%20refers%20to%20the%20increase%20in%20a%20stock's,Jim%20Cramer's%20show%20Mad%20Money.&text=Research%20has%20shown%20an%20average,the%20effect%20is%20short%2Dlived.)
 
 [5] [Backtraing.py repo](https://github.com/kernc/backtesting.py)
+
+[6] [Yahoo Finance API](https://github.com/ranaroussi/yfinance)
 
 <img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=640>
