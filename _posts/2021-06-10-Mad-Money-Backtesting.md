@@ -1,5 +1,5 @@
 ---
-title: "Bactesting Mad-Money recommendations and the Cramer-effect"
+title: "Backtesting Mad-Money recommendations and the Cramer-effect"
 subtitle: "Can we profit from the stock picking guru?"
 layout: post
 date: 2021-06-10 00:00
@@ -18,9 +18,9 @@ externalLink: false
 When it comes to trading, investors are listening a lot on other people opinions without looking into the data and 
 the background of the company. And the more credible (at least in theory) the source the more people pay attention
 without any second thought. This is the case with the show *Mad Money* on CNBC *[1]* with the host *Jim Cramer*.
-*It is funny how this is not a problem for the SEC or anyone, but people talkig on forums suggesting stocks is bad and
+*It is funny how this is not a problem for the SEC or anyone, but people talking on forums suggesting stocks is bad and
 should be punished.*
-In this post I will show you how the "Mad Money" portfolio could have performerd and what the Cramer effect looks like.
+In this post I will show you how the "Mad Money" portfolio could have performed and what the Cramer effect looks like.
 
 To achieve this I scraped the historical buy recommendations from the show, then backtested every company which was
 on the list as a "buy recommendation".
@@ -33,7 +33,7 @@ Find the GitHub repo with all the code and data used to write this post:
 # The Cramer effect and his recommendations
 
 **The Cramer Effect (Cramer Bounce)**: 
-After the show Mad Money the recommended stocks are bought by viewers almost immediately (afterhours trading)
+After the show Mad Money the recommended stocks are bought by viewers almost immediately (after hours trading)
 or on the next day at market open, increasing the price for a short period of time. *[4]*
 
 This is really interesting but not surprising as I already pointed out in the intro how this works for most people.
@@ -57,7 +57,7 @@ You can do this for yourself with [this little script](https://github.com/gaborv
 
 ## Automation w/ GitHub Actions
 
-Let's be honest, we can do much better than manually preparing the data. Even better, as the resultsing file is
+Let's be honest, we can do much better than manually preparing the data. Even better, as the resulting file is
 not huge, we can keep it in the version control system. This is not just a fancy addition, but can actually help as
 it can be directly used by everyone and more importantly, we can see the change in the contents of the file over time.
 Maybe you think it's not a big deal, but this way, if there would be a problem on the Mad Money crew's end, and they
@@ -90,8 +90,6 @@ At each buy recommendation we go "all in" and buy as many positions as we can wi
 The buy and sell dates are defined in the backtesting classes, and they are "calculated" from the recommendation dates.
 This is repeated if a company was mentioned more times.
 
-(Also, a commissing is set: $2%$.)
-
 ## Challenges
 
 Before I show the results, I would like to write a bit about the challenges. These are important factors as all of
@@ -106,7 +104,7 @@ as `Yfinance` can provide it but it is sparse. I "solved" this by stating that t
 it is at market close. Of course this way we cannot test with high accuracy the "after the show" after-hours volatility.
 
 If you have (maybe a paid) data resource, then by adjusting the buy/sell date calculations, you can easily adapt the
-strategies to a propre after-hours trading session which would provide the accurate results for the Cramer effect.
+strategies to a proper after-hours trading session which would provide the accurate results for the Cramer effect.
 
 ### Missing days
 
@@ -114,15 +112,23 @@ There are a few days for each stock, where we have missing data. There is a func
 Either you drop it, or use the next "closest" date.
 
 Dropping would mean, that we won't buy/sell on the date at all, while using the closest date could result in lower
-accuracy in returns, as that is also an approximation. Btw. if in the real-life scenario we would not stirictly follow
+accuracy in returns, as that is also an approximation. Btw. if in the real-life scenario we would not strictly follow
 the buy patterns, and would buy max 1 business day later, than that would match with this approximation.
+
+### Data Quality
+
+I don't have any measure for this, but as I saw free sources of stock data have their problems and not
+accurate. When measuring short term effects, $0.5 can make a difference or an even smaller amount.
+
+(But take this point with a grain of salt, as I only used free data sources.)
 
 ## Trading Strategies
 
 Multiple trading strategies are implemented to test the Cramer effect and his "portfolio":
 - A) *BuyAndHold* (and repeat)
   - The stocks are bought at the first mention on the show, then held for $N$ days. On the $N$th day the positions are 
-  closed. If there were other mentions after we sold, we repeat this process
+	closed. If there were other mentions after we sold, we repeat this process. (If at the end of the simulation we still
+	have open positions, those are closed automatically)
 - B) *AfterShowBuyNextDayCloseSell*
   - We buy the mentioned stocks at the end of the show and then sell on the next day at market Close
 - C) *AfterShowBuyNextDayOpenSell*
@@ -131,19 +137,66 @@ Multiple trading strategies are implemented to test the Cramer effect and his "p
   - We buy the mentioned stocks at next day market open and then sell it on the same day at market close
 
 The Cramer-effect is simulated with strategies *B, C* and *D*, as we are aiming for the short-term effect.
-Stretegy *D* is the one, where no after-hours trading is involved.
+Strategy *D* is the one, where no after-hours trading is involved.
 
 ## Results
 
-### Buy and Hold
+Results are obtained by observing stock values and company mentions from `2020-01-01` to `2021-06-04`.
 
-TODO
+At every show there are "buy" recommendations and also "positive" mentions. The latter means that there is a bigger
+chance to see bullish market, but it's not as strong as the buy recommendation. In conclusion we should see more
+consistent returns with the buy signals. This is what I used for the backtesting.
+
+For each unique stock I invested $1000 and set a commission of 2% (1% at buy and 1% at sell).
+
+(In the code there is an option to use stop-loss and take-profit, but results were calculated without these)
+
+### Buy and Hold (and repeat)
+
+|   Days Held |   Negative Returns |   Positive Returns |   Mean Return % |   Median Return % |
+|------------:|-------------------:|-------------------:|----------------:|------------------:|
+|           1 |                543 |                170 |        -4.85436 |         -3.01154  |
+|           2 |                523 |                190 |        -4.38844 |         -3.3714   |
+|           5 |                481 |                232 |        -3.03959 |         -2.72434  |
+|          10 |                455 |                258 |        -3.09772 |         -3.42916  |
+|          30 |                385 |                328 |         1.84899 |         -1.93449  |
+|          60 |                348 |                365 |         9.75003 |          0.699654 |
+|          90 |                329 |                383 |        12.1096  |          2.70547  |
+|         120 |                295 |                418 |        17.6343  |          5.15033  |
+|         240 |                227 |                486 |        31.5762  |         12.1968   |
+|         365 |                215 |                498 |        38.8041  |         18.1675   |
+|         373 |                185 |                528 |        42.6746  |         20.8505   |
+
+<img src="art/buy_and_hold_returns_mean_median.png" width="600" alt="returns"></a>
+
+<img src="art/buy_and_hold_returns_pos_neg.png" width="600" alt="returns"></a>
 
 ### Cramer Effect
 
-TODO
+These are the short term trading strategies which I tested.
 
-# Conclustion
+| Strategy                       |   Negative Returns |   Positive Returns |   Mean Return % |   Median Return % |
+|:-------------------------------|-------------------:|-------------------:|----------------:|------------------:|
+| AfterShowBuyNextDayCloseSell   |                546 |                166 |        -5.01226 |          -3.12014 |
+| AfterShowBuyNextDayOpenSell    |                570 |                142 |        -5.10033 |          -3.16921 |
+| NextDayOpenBuyNextDayCloseSell |                543 |                169 |         0.83846 |          -2.9403  |
+
+In the repo, under the `art/` folder you should find visualizations for the results of each strategy.
+
+# Conclusion
+
+From the **Buy and Hold**1 results it is visible that creating a diverse portfolio and holding the positions results in greater returns.
+So no magic here, just the golden rule of investing - be diverse and hold.
+
+Of course this is nowhere near a real-life scenario. Let's think about it: there are more than 700 unique stocks and
+I invested $1000 per stock. At the end this resulted in a more than $700,000 investment.
+
+We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amont per day
+and based on some logic select positions to buy, which again, results in excluding stocks.
+
+On the **Cramer-Effect and short-term investment** results, I don't have any convincing results. Based on these
+numbers I would say that the Cramer effect is not present, but keep in mind that I used multiple approximations
+because of the incomplete/missing data.
 
 # References
 
@@ -159,4 +212,3 @@ TODO
 
 [6] [Yahoo Finance API](https://github.com/ranaroussi/yfinance)
 
-<img src="https://github.com/gaborvecsei/Stocks-Pattern-Analyzer/raw/master/art/homepage.png" alt="stock patterns tool" width=640>
