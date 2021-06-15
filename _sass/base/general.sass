@@ -27,16 +27,19 @@ h3
 h4
 	font-size: 1.6rem
 
-table, th, td
-	border: 1px black solid
-
 table
 	border-collapse: collapse
+	width: 100%
+	display: inline-block
+	overflow-x: auto
 
 td, th
 	border: 1px solid #999
 	padding: 0.5rem
 	text-align: left
+
+tr:nth-child(even)
+	background-color: $epsilon
 
 a
 	color: $delta
