@@ -159,7 +159,7 @@ At every show there are "buy" recommendations and also "positive" mentions. The 
 chance to see bullish market, but it's not as strong signal as the buy recommendation. In conclusion we should see more
 consistent returns with the buy signals. This is what I used for the backtesting.
 
-For each unique stock I invested $\text{$1000}$ and set a commission of 2%
+For each unique stock I invested \\$1000 and set a commission of 2%
 
 (In the code there is an option to use stop-loss and take-profit, but results were calculated without these).
 
@@ -204,7 +204,7 @@ So no magic ðŸ§™ here, just the golden rule of investing - be diverse and hold ð
 (Also don't forget that the tested period was bullish most of the time, so it was "easier" to generate profits).
 
 Of course this is nowhere near a real-life scenario. Let's think about it: there are more than 700 unique stocks and
-I invested $\text{$1000}$ per stock. At the end this resulted in a more than $\text{$700,000}$ investment.
+I invested \\$1000 per stock. At the end this resulted in a more than \\$700,000 investment.
 We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amount per day
 and based on some logic select positions to buy, which again, results in excluding stocks.
 
