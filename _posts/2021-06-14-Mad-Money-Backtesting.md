@@ -45,7 +45,7 @@ of the stock picking guru and his team.
 # Recommendations data from the show
 
 Fortunately the data is available, as Cramer's team makes it available via their own website *[2]*, we just need
-to get itfrom there.
+to get it from there.
 
 You can find a table on the site which holds the mentioned stocks and actions on the show for a single day. As you can see
 there are some basic options where we can select a price threshold, and most importantly the day, when there was a show.
@@ -205,7 +205,7 @@ So no magic ðŸ§™ here, just the golden rule of investing - be diverse and hold ð
 
 Of course this is nowhere near a real-life scenario. Let's think about it: there are more than 700 unique stocks and
 I invested \\$1000 per stock. At the end this resulted in a more than \\$700,000 investment.
-We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amont per day
+We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amount per day
 and based on some logic select positions to buy, which again, results in excluding stocks.
 
 On the **Cramer-Effect and short-term investment** results, I don't have any convincing results. Based on these
@@ -223,7 +223,7 @@ But it is true that there are no short term significant returns based on these s
 
 [4] [The Cramer Effect](https://www.investopedia.com/terms/c/cramerbounce.asp#:~:text=The%20Cramer%20bounce%20refers%20to%20the%20increase%20in%20a%20stock's,Jim%20Cramer's%20show%20Mad%20Money.&text=Research%20has%20shown%20an%20average,the%20effect%20is%20short%2Dlived.)
 
-[5] [Backtraing.py repo](https://github.com/kernc/backtesting.py)
+[5] [Backtrading.py repo](https://github.com/kernc/backtesting.py)
 
 [6] [Yahoo Finance API](https://github.com/ranaroussi/yfinance)
 
