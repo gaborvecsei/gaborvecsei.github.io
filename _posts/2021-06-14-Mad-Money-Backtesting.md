@@ -18,16 +18,14 @@ externalLink: false
 When it comes to trading, investors are listening a lot on other people opinions without looking into the data and 
 the background of the company. And the more credible (at least in theory) the source is, the more people pay attention
 without any second thought. This is the case with the show *Mad Money* on CNBC *[1]* with the host *Jim Cramer*.
-*It is funny how this is not a problem for the SEC or anyone, but people talking on forums suggesting stocks is bad and
-should be regulated.*
 In this post I will show you how the "Mad Money" portfolio could have performed and what the Cramer effect looks like
-(if there is such thing).
+(if there is such a thing).
 
 To achieve this, I scraped the historical buy recommendations from the show, then backtested every company which was
 on the list as a "buy recommendation".
 
 Find the GitHub repo with all the code and data used to write this post:
-[https://github.com/gaborvecsei/Mad-Money-Backtesting](https://github.com/gaborvecsei/Mad-Money-Backtesting}
+[https://github.com/gaborvecsei/Mad-Money-Backtesting](https://github.com/gaborvecsei/Mad-Money-Backtesting)
 
 <img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/cramer.gif" width="400" alt="Cramer">
 
