@@ -70,7 +70,7 @@ We can get rid of the "it's working on my computer" but for data problem.
 Also, with the Flat Data Viewer *[3]*, we get a cool visualization:
 [https://flatgithub.com/gaborvecsei/Mad-Money-Backtesting](https://flatgithub.com/gaborvecsei/Mad-Money-Backtesting)
 
-<img src="https://github.com/gaborvecsei/Mad-Money-Backtesting/raw/master/art/flat_data_preview.png" width="600" alt="flatdata"></a>
+<img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/flat_data_preview.png" width="600" alt="flatdata"></a>
 
 This is all achieved with *GitHub Actions*. Without going into the details it's just this simple:
 - Setup the workflow
@@ -176,9 +176,9 @@ For each unique stock I invested $1000 and set a commission of 2% (1% at buy and
 |         365 |                215 |                498 |        38.8041  |         18.1675   |
 |         373 |                185 |                528 |        42.6746  |         20.8505   |
 
-<img src="https://github.com/gaborvecsei/Mad-Money-Backtesting/blob/master/art/buy_and_hold_returns_mean_median.png" width="600" alt="returns"></a>
+<img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/buy_and_hold_returns_mean_median.png" width="600" alt="returns"></a>
 
-<img src="https://github.com/gaborvecsei/Mad-Money-Backtesting/blob/master/art/buy_and_hold_returns_pos_neg.png" width="600" alt="returns"></a>
+<img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/buy_and_hold_returns_pos_neg.png" width="600" alt="returns"></a>
 
 ### Cramer Effect
 
