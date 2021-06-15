@@ -199,7 +199,7 @@ So no magic 🧙 here, just the golden rule of investing - be diverse and hold.
 (Also don't forget that the tested period was bullish most of the time, so it was "easier" to generate profits).
 
 Of course this is nowhere near a real-life scenario. Let's think about it: there are more than 700 unique stocks and
-I invested $1000 per stock. At the end this resulted in a more than $700,000 investment.
+I invested \$1000 per stock. At the end this resulted in a more than \$700,000 investment.
 
 We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amont per day
 and based on some logic select positions to buy, which again, results in excluding stocks.
