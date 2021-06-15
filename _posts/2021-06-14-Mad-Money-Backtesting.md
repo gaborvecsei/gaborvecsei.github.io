@@ -18,7 +18,7 @@ externalLink: false
 When it comes to trading, investors are listening a lot on other people opinions without looking into the data and 
 the background of the company. And the more credible (at least in theory) the source is, the more people pay attention
 without any second thought. This is the case with the show *Mad Money* on CNBC *[1]* with the host *Jim Cramer*.
-In this post I will show you how the "Mad Money" portfolio could have performed and what the Cramer effect looks like
+In this post I will show you how the "Mad Money" portfolio could have performed and what the Cramer-effect *[4]* looks like
 (if there is such a thing).
 
 To achieve this, I scraped the historical buy recommendations from the show, then backtested every company which was
@@ -45,24 +45,25 @@ of the stock picking guru and his team.
 # Recommendations data from the show
 
 Fortunately the data is available, as Cramer's team makes it available via their own website *[2]*, we just need
-to get the data from there.
+to get itfrom there.
 
 You can find a table on the site which holds the mentioned stocks and actions on the show for a single day. As you can see
 there are some basic options where we can select a price threshold, and most importantly the day, when there was a show.
-If we look closely and investigate the requests HTTP request (via the browsers dev mode), we can see that a simple POST
+If we look closely and investigate the HTTP request (via the browsers dev mode), we can see that a simple POST
 request is sent with some form data (`application/x-www-form-urlencoded`) which contains the different "filterings".
-This can be easily constructed, so once we have the contents of the page, we only need to parse it. I used
+[This can be easily constructed](https://github.com/gaborvecsei/Mad-Money-Backtesting/blob/master/mad_money_backtesting/data.py#L26),
+so once we have the contents of the page, we only need to parse it. I used
 `BeautifulSoup` for that.
 
-You can do this for yourself with [this little script](https://github.com/gaborvecsei/Mad-Money-Backtesting/blob/master/scrape_mad_money.py).
+You can try this for yourself with [this little script](https://github.com/gaborvecsei/Mad-Money-Backtesting/blob/master/scrape_mad_money.py).
 
 ## Automation w/ GitHub Actions
 
 Let's be honest, we can do much better than manually preparing the data. Even better, as the resulting file is
 not huge, we can keep it in the version control system. This is not just a fancy addition, but can actually help as
 it can be directly used by everyone and more importantly, we can see the change in the contents of the file over time.
-Maybe you think it's not a big deal, but this way, if there would be a problem on the Mad Money crew's end, and they
-would mess up recommendations for some dates (in the present everyone is smarter about the past 😉) then we would see it.
+Maybe you think it's not a big deal, but this way, if there would be a "problem" on the Mad Money crew's end, and they
+would mess up recommendations for some dates (in the present everyone is smarter about the past 😉, wink wink) then we would see it.
 We can get rid of the "it's working on my computer" but for data problem.
 
 Also, with the Flat Data Viewer *[3]*, we get a cool visualization:
@@ -70,12 +71,14 @@ Also, with the Flat Data Viewer *[3]*, we get a cool visualization:
 
 <img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/flat_data_preview.png" width="600" alt="flatdata">
 
-This is all achieved with *GitHub Actions*. Without going into the details it's just this simple:
-- Setup the workflow
+This is all achieved with *GitHub Actions*. Without going into the details it's as simple as:
+- Checkout master branch
 - Prepare Python with the necessary dependencies
-- Use the scraper code to get and transform the data
-- If there was a change in the contents then let's commit it
+- Use the scraper code to retrieve and transform the data
+- If there was a change in the contents of the `.csv` file, then let's commit it
 - Enjoy the fruits of this really cool feature
+
+(Idea is from *[7]*)
 
 # Backtesting
 
@@ -87,10 +90,12 @@ and `yfinance` *[6]* with which I got the historical stock data.
 
 For the simulations, each mentioned stock is tested individually, then the overall results are calculated.
 (We also store the individual results in a html file.)
-I have a predefined amount which I would invest in a stock. This stays the same no matter the price, as we want to
+I prepared a predefined amount which I would invest in a stock. This stays the same no matter the company, as we want to
 spend equally as we don't know how the stock will perform.
 At each buy recommendation we go "all in" and buy as many positions as we can with the money. Once we sell, then we sell all of it.
 The buy and sell dates are defined in the backtesting classes, and they are "calculated" from the recommendation dates.
+
+$\text{Recommendation dates} \rightarrow \text{Buy dates} \rightarrow \text{Sell dates}$
 
 If a company was mentioned more times, then based on the strategy we can buy and sell more times.
 
@@ -104,8 +109,8 @@ Fortunately if you have better data, then it is easily curable.
 ### After hours data
 
 This is one of the biggest problems 😢 as we literally don't have it. It's a bit of an over exaggeration,
-as `yfinance` can provide it but it is sparse. I "solved" this by stating that the price at showtime is the same as
-it is at market close. Of course this way, we cannot count on the profits/losses of the after-hours volatility which 
+as `yfinance` can provide it but it is sparse. I solved this by stating that the price at showtime is the same as
+it is at market close. Of course with this (dummy) extrapolation, we cannot count on the profits/losses of the after-hours volatility which 
 would be generated (in theory) by the show.
 
 If you have (maybe a paid) data resource, then by adjusting the buy/sell date calculations, you can easily adapt the
@@ -125,26 +130,26 @@ the buy patterns, and would buy max few business day later, than that would matc
 
 I don't have any measures for this, but as I saw free sources of financial data have their own problems and they are
 usually not accurate.
-When measuring short term effects, few cents can make a difference.
+When measuring short term effects, few cents can make a difference. We need to keep this in our minds as well.
 
 (But take this point with a grain of salt, as I only used free data sources.)
 
 ## Trading Strategies
 
 Multiple trading strategies are implemented to test the Cramer effect and his "portfolio":
-- A) *BuyAndHold* (and repeat)
+- $A$) *BuyAndHold* (and repeat)
   - The stocks are bought at the first mention on the show, then held for $N$ days. On the $N$th day the positions are 
 	closed. If there were other mentions after we sold, we repeat this process. (If at the end of the simulation we still
 	have open positions, those are closed automatically)
-- B) *AfterShowBuyNextDayCloseSell*
+- $B$) *AfterShowBuyNextDayCloseSell*
   - We buy the mentioned stocks at the end of the show and then sell on the next day at market Close
-- C) *AfterShowBuyNextDayOpenSell*
+- $C$) *AfterShowBuyNextDayOpenSell*
   - We buy the mentioned stocks at the end of the show and then sell on the next day at market Open
-- D) *NextDayOpenBuyNextDayCloseSell*
+- $D$) *NextDayOpenBuyNextDayCloseSell*
   - We buy the mentioned stocks at next day market open and then sell it on the same day at market close
 
-The Cramer-effect is simulated with strategies *B, C* and *D*, as we are aiming for the short-term effect.
-Strategy *D* is the one, where no after-hours trading is involved.
+The Cramer-effect is simulated with strategies $B$, $C$ and $D$, as we are aiming for the short-term effect.
+Strategy $D$ is the one, where no after-hours trading is involved.
 
 ## Results
 
@@ -154,7 +159,7 @@ At every show there are "buy" recommendations and also "positive" mentions. The 
 chance to see bullish market, but it's not as strong signal as the buy recommendation. In conclusion we should see more
 consistent returns with the buy signals. This is what I used for the backtesting.
 
-For each unique stock I invested \\$1000 and set a commission of 2% (1% at buy and 1% at sell).
+For each unique stock I invested \\$1000 and set a commission of $2%$
 
 (In the code there is an option to use stop-loss and take-profit, but results were calculated without these).
 
@@ -178,6 +183,8 @@ For each unique stock I invested \\$1000 and set a commission of 2% (1% at buy a
 
 <img src="https://raw.githubusercontent.com/gaborvecsei/Mad-Money-Backtesting/master/art/buy_and_hold_returns_pos_neg.png" width="600" alt="returns">
 
+*(at this last plot the y axis is count and not Return)*
+
 ### Cramer Effect
 
 These are the short term trading strategies which I tested.
@@ -193,18 +200,18 @@ In the repo, under the `art/` folder you should find visualizations for the resu
 # Conclusion
 
 From the **Buy and Hold** results it is visible that creating a diverse portfolio and holding the positions results in greater returns.
-So no magic 🧙 here, just the golden rule of investing - be diverse and hold.
+So no magic 🧙 here, just the golden rule of investing - be diverse and hold 💎👐.
 (Also don't forget that the tested period was bullish most of the time, so it was "easier" to generate profits).
 
 Of course this is nowhere near a real-life scenario. Let's think about it: there are more than 700 unique stocks and
 I invested \\$1000 per stock. At the end this resulted in a more than \\$700,000 investment.
-
 We could fix this buy using a smaller amount, which would exclude stocks to buy then, or we could set an amont per day
 and based on some logic select positions to buy, which again, results in excluding stocks.
 
 On the **Cramer-Effect and short-term investment** results, I don't have any convincing results. Based on these
 numbers I would say that the Cramer effect is not present, but keep in mind that I used multiple approximations
-because of the incomplete/missing data.
+because of the incomplete/missing data. So if there would be a small upside, then we would not catch it this was.
+But it is true that there are no short term significant returns based on these strategies.
 
 # References
 
@@ -219,4 +226,6 @@ because of the incomplete/missing data.
 [5] [Backtraing.py repo](https://github.com/kernc/backtesting.py)
 
 [6] [Yahoo Finance API](https://github.com/ranaroussi/yfinance)
+
+[7] [Git scraping: track changes over time by scraping to a Git repository](https://simonwillison.net/2020/Oct/9/git-scraping/)
 
