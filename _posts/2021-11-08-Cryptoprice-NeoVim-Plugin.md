@@ -1,5 +1,5 @@
 ---
-title: "CryptoPrice Neovim Plugin"
+title: "CryptoPrice Neovim Plugin to check your favourite coins"
 subtitle: ""
 layout: post
 date: 2021-11-08 00:00
