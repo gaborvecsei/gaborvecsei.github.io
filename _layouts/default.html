@@ -5,6 +5,17 @@ layout: compress
 <html lang="en">
 <head>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- TODO: Move the GA ID to the config -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ6Z0PB8G5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QJ6Z0PB8G5');
+    </script>
+
     {% if site.analytics-google %}
         {% include analytics-google.html %}
     {% endif %}
