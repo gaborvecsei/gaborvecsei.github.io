@@ -66,7 +66,7 @@ It's not the same as the original one... and yeah that's the whole point, the di
 Next we can take $16bits$ from the fraction of $x$ and play around with it, "simulate" how the value changes as we change these bits.
 Randomly doing this $1000$ times yields the following plot:
 
-<img src="../assets/nn_steganography/fp32_modification_randomly.png" width="640" alt="">
+<img src="https://gaborvecsei.github.io/assets/nn_steganography/fp32_modification_randomly.png" width="640" alt="">
 
 But of course we can just set all bits to $0$s and $1$s and then we have the "range of change".
 
@@ -102,7 +102,7 @@ But how much data can we store here? Actually... a lot, but it should not be sup
 After I decided to run the experiment, where I change $16bits$ from the fraction of every parameter (in every Conv2D layer) I could calculate the amount of data I can store.
 Here you can see the layer-wise breakdown:
 
-<img src="../assets/images/nn_steganography/resnet50_conv2d_storage_capacity.png" width="640" alt="">
+<img src="https://gaborvecsei.github.io/assets/images/nn_steganography/resnet50_conv2d_storage_capacity.png" width="640" alt="">
 
 Adding up all the bits for the params in the 53 layers, it turns out we can easily store $44MB$s of data.
 And keep in mind that today this is an averaged size model.
