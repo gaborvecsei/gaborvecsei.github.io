@@ -20,16 +20,16 @@ externalLink: false
 *We all have secrets, and now you can share these with your favourite neural network* - this is the pretty bad
 sales pitch, now let's see how it comes together.
 
-Steganography is the practice of concealing a message within another message or a physical object [*[1]*](#References).
+Steganography is the practice of concealing a message within another message or a physical object [*[1]*](#references).
 Hiding a message in a picture, or a picture within another picture are good examples on how you can break down the
 two entites (base image and secret) and slightly alter the base data to hide your secret. The idea, is that you can make really small
 modifications to the base which is usually impossible to spot with your eyes and those modifications contain what you
-wanted to hide. Imagine increasing every $R$ value from the $(R, G, B)$ representation of the image with 1 if $R &lt 255$ .
+wanted to hide. Imagine increasing every $R$ value from the $(R, G, B)$ representation of the image with 1 if $R &lt; 255$.
 The result is a brand new image where you've hidden your secret, and still you will hardly be able to tell them apart. 
 
 This idea is the same with neural networks as a NN can contain millions of parameters which we can smartly modify to
 embed some secrets.
-This is what we can read about in the publication *"EvilModel: Hiding Malware Inside of Neural Network Models"* *[2]*
+This is what we can read about in the publication *"EvilModel: Hiding Malware Inside of Neural Network Models"* [*[2]*](#references)
 which I wanted to test with my own implementation.
 
 [gaborvecsei/Neural-Network-Steganography - Code and notebooks for the experiments](https://github.com/gaborvecsei/Neural-Network-Steganography)
@@ -43,7 +43,7 @@ In this post I will be using the single precision, 32 bit representation (`float
 
 ## Structure of a `float32`
 
-I won't cover the whole story around floating points, you can read it up here: *[3]*, but as a quick refresher, this is what you need to know for these experiments.
+I won't cover the whole story around floating points, you can read it up here: [*[3]*](#references), but as a quick refresher, this is what you need to know for these experiments.
 We can split the binary representation into 3 parts and then use these to calculate the value of the number:
 - *sing* - the 1st bit
 - *exponent* - 8 bits after the sign bit
@@ -56,7 +56,7 @@ the decision how many and which bits to change in the original representation.
 
 ## Floating-Point experiment
 
-As an experiment, let's say, we would like to modify the number $x=-69.420$. I wrote a little utility class *[4]* with which we
+As an experiment, let's say, we would like to modify the number $x=-69.420$. I wrote a little utility class [*[4]*](#references) with which we
 can easily experiment with the representation.
 Let's take $x$, convert to the mentioned
 binary representation: $11000010100010101101011100001010$ and then calculate it's value again: $-69.41999816894531$.
@@ -105,7 +105,7 @@ Here you can see the layer-wise breakdown:
 
 Adding up all the bits for the params in the 53 layers, it turns out we can easily store $44MB$s of data.
 And keep in mind that today this is an averaged size model.
-It would be really easy to hide a few Trojan viruses here *[5]*.
+It would be really easy to hide a few Trojan viruses here [*[5]*](#references).
 
 We can also take a look on basic statistics for the parameters, to get a hint how much precision we need to retain, and
 these would help for any fancyer placement of the secret bits (e.g. clustering), but I will be using a simple iterative method.
