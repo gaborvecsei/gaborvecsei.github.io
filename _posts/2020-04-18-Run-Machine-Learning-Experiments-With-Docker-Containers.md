@@ -1,6 +1,6 @@
 ---
 title: "Run Machine Learning Experiments with Docker Containers"
-subtitle: "Quick reproducibility and mobility"
+subtitle: "Quick reproducibility and mobility - how to run your experiments"
 layout: post
 date: 2020-04-18 00:00
 tag:

@@ -1,6 +1,6 @@
 ---
 title: "Let your NeoVim remember where you've been with the Memento.nvim plugin"
-subtitle: ""
+subtitle: "A NeoVim plugin which remembers where you've been"
 layout: post
 date: 2021-11-15 00:00
 tag:

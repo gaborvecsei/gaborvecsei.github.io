@@ -1,6 +1,6 @@
 ---
 title: "Barlow Twins Tensorflow Implementation - Self-Supervised Learning via Redundancy Reduction"
-subtitle: ""
+subtitle: "Clean Tensorflow 2 Implementation of the Barlow Twins self-supervised learning method"
 layout: post
 date: 2021-07-6 00:00
 tag:

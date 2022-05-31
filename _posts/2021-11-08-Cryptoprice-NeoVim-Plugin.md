@@ -1,6 +1,6 @@
 ---
 title: "CryptoPrice Neovim Plugin to check your favourite coins"
-subtitle: ""
+subtitle: "NeoVim plugin with which you can check the price of your favourite cryptos"
 layout: post
 date: 2021-11-08 00:00
 tag:
