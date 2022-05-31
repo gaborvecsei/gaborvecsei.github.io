@@ -41,7 +41,7 @@ with infinite precision. This is why we are using floating-points numbers with w
 with a fixed number of bits to a certain precision and range.
 In this post I will be using the single precision, 32 bit representation (`float32`).
 
-## Structure of a `float32`
+## Structure of a FP32
 
 I won't cover the whole story around floating points, you can read it up here: [*[3]*](#references), but as a quick refresher, this is what you need to know for these experiments.
 We can split the binary representation into 3 parts and then use these to calculate the value of the number:
@@ -49,7 +49,8 @@ We can split the binary representation into 3 parts and then use these to calcul
 - *exponent* - 8 bits after the sign bit
 - *fraction* - 23 bits after the last bit of the exponent
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png" width="640" alt="">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png" width="400" alt="">
+
 (source: [*[3]*](#references))
 
 Modifying these binary representations allows us to store some data while giving up some precision what we can control by
@@ -163,7 +164,7 @@ Looking only at the changes where the prediction (`np.argmax(output)`) is differ
 Changed number of predictions: 146 / 14241 | 1.0252089038691103%
 ```
 
-So we can see that almost all outputs changed slightly, and for some cases (approx. $1%$) this resulted in a new output label.
+So we can see that almost all outputs changed slightly, and for some cases (approx. $1\%$) this resulted in a new output label.
 
 # Conclusion
 
