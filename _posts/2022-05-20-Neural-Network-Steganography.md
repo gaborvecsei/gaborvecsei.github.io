@@ -19,7 +19,8 @@ externalLink: false
 
 *We all have secrets, and now you can share these with your favourite neural network* 🤫
 
-[gaborvecsei/Neural-Network-Steganography - Code and notebooks for the experiments](https://github.com/gaborvecsei/Neural-Network-Steganography)
+[gaborvecsei/Neural-Network-Steganography - **Code and notebooks for the experiments**](https://github.com/gaborvecsei/Neural-Network-Steganography).
+I encourage everybody to follow the post with the code for easier and more practical understanding.
 
 Steganography is the practice of concealing a message within another message or a physical object [*[1]*](#references).
 Hiding a message in a picture, or a picture within another picture are good examples on how you can break down the
