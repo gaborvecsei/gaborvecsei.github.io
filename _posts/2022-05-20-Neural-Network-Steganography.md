@@ -100,28 +100,33 @@ The process is the following:
 There is a trade-off what we need to consider when modifying bits of parameters in a neural network:
 The more precision you give up at each value the more data you can store.
 But think about what this precision means in a NN.
-You are using these parameters to performa the forward pass and receive a prediction, and you'd like to keep this prediction as close as you can to the original one.
+You are using these parameters to perform a the forward pass and receive a prediction, and you'd like to keep this prediction as close as you can to the original one.
 Worst case scenario, the outputs of the network will be so different, that you won't notice the 24 days of training what you did.
+
+As a general rule, just try to compress your data and use less bits from the fraction.
+Empirically it's better to modify less bits everywhere int he network compared to modify more bits for certain selected layers.
+I will include such measurements in upcoming posts.
 
 ## Experiment
 
-After all this theory let's see an actual experiment. I wrote the tools to use it not just to sit on it.
+After all this theory let's see an actual experiment 🥳.
+I wrote the tools to use it not just to sit on it 🦾.
 
 ### Parameters
 
 I used the well known `ResNet50` network trained on `ImageNet` which is easily accessible at every deep learning framework.
 But how much data can we store here? Actually... a lot, but it should not be suprising with the number of parameters.
-After I decided to run the experiment, where I change $16bits$ from the fraction of every parameter (in every Conv2D layer) I could calculate the amount of data I can store.
+After I decided to run the experiment, where I change $16bits$ from the *fraction* of every parameter (in every `Conv2D` layer) I could calculate the amount of data I can store.
 Here you can see the layer-wise breakdown:
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/nn_steganography/resnet50_conv2d_storage_capacity.png" width="640" alt="">
 
 Adding up all the bits for the params in the 53 layers, it turns out we can easily store $44MB$s of data.
-And keep in mind that today this is an averaged size model.
+And keep in mind that today this is an averaged size CV model.
 It would be really easy to hide a few Trojan viruses here [*[5]*](#references).
 
 We can also take a look on basic statistics for the parameters, to get a hint how much precision we need to retain, and
-these would help for any fancyer placement of the secret bits (e.g. clustering), but I will be using a simple iterative method.
+these would help for any fancyer placement of the secret bits (e.g. calculate the number of bits to use for clusters on values), but I will be using a simple iterative method.
 
 ```
 Min: -0.7719802856445312
@@ -140,28 +145,30 @@ Nb positives: 10708719 - 45.6566%
 
 ### Placement of the bits
 
-For quick experimentation I chose to generate a random $44MB$ data as a secret, a simple iterative approach, where I use a sliding window on the secret bits
-and starting from the 1st layers 1st parameter I make the modifications.
-In the first iteration I take the bits from 0th to 15th from the secret, convert the first parameter in the first conv2d layer to the binary representation,
-take the last 16 bits of the fraction and switch the two. The second iteration I slide the window and take it from 16th to 31th and switch with the last 16 bits of the second parameter.
+For quick experimentation I chose to generate a random $44MB$ data as a secret and a simple iterative approach for hiding it,
+where I use a stepping window on the secret bits and starting from the 1st layers 1st parameter I make the modifications.
+In the first iteration I take the bits from 0th to 15th from the secret, convert the first parameter in the first `conv2d` layer to the binary representation,
+take the last 16 bits of the fraction and switch the two. The second iteration I step the window and take it from 16th to 31th and switch with the last 16 bits of the second parameter.
 And this goes on until we don't have any more bits to hide.
 
 ### Reconstruction
 
-So I think the backward process is obvious and I won't waste virtual paper on it, but there are 3 things you need to remember for the reconstruction:
-- The order in which you modified the layers and the parameters
-- The number of bits used for each parameter
+So I think the backward process is obvious and I won't waste virtual paper on it (it's a homework for everyone reading this 😉),
+but there are 3 things you need to remember for the reconstruction:
+- The order in which you modified the layers and the parameters (now it's ordered by the index of the layer in the NN)
+- The number of bits used for each parameter (fortunately it's global for this algo)
 - The index of the last modified parameter, so we can stop the process
+    - (If your data is $8 bits$ while your NN has $20,000,000$ parameters, you can hide a single bit in the first $8$ parameters)
 
 ### Evaluation - How much the predictions changed?
 
 As the test dataset I used images randomly found on my laptop, as we don't necessarily interested in the predictions,
 only in the difference of the predictions compared to the original state. You only need to pay attention that the
-dataset is diverse enough, so it covers all cases the network can meet with.
+dataset should be diverse enough, so it covers all cases the network can meet with.
 
 With my $14,241$ images the results are the following:
 
-Analyzing the softmax output values with the 1000 classes:
+Analyzing the *softmax* output values with the 1000 classes:
 
 ```
 Min abs difference: 0.0
@@ -169,13 +176,15 @@ Max abs difference: 0.11202079057693481
 Number of changed prediction values: 14240972 / 14241000 | 99.9998%
 ```
 
-Looking only at the changes where the prediction (`np.argmax(output)`) is different:
+Looking only at the changes where the prediction label (`np.argmax(output)`) is different:
 
 ```
 Changed number of predictions: 146 / 14241 | 1.0252089038691103%
 ```
 
 So we can see that almost all outputs changed slightly, and for some cases (approx. $1\%$) this resulted in a new output label.
+This is not suprising based on the maximum change values, just imagine a 3 class case where these are the original values:
+$[0.3, 0.34, 0.36]$ (label would be *2*) and after the modification it's: $[0.3, 0.351, 0.349]$ (where label is *1*).
 
 # Conclusion
 
