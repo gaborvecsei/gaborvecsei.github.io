@@ -90,7 +90,7 @@ The process is the following:
     - Store each individual prediction not just the overall metrics (e.g. f1 score) - for more through evaluation
 1. 0️⃣1️⃣ Convert your data/secret to binary representation
 2. 🤓 Calculate how many bits are needed to hide this data, then check if you have the available "storage" in your NN
-    - $storage=\text{nb_bits} * /text{nb_parameters}$
+    - $storage=\text{nb_bits} * \text{nb_parameters}$
     - Remember that there is a quality-quantity trade-off so try to use low number of bits
 3. 🤖Go over the parameters in the network, conver to binary format, then switch the defined bits to bits from the secret
 4. 🔎 Evaluate the NN again, and inspect the differences
