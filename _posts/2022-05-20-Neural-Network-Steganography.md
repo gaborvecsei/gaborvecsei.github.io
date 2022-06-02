@@ -17,72 +17,83 @@ externalLink: false
 
 # Introduction
 
-*We all have secrets, and now you can share these with your favourite neural network* - this is the pretty bad
-sales pitch, now let's see how it comes together.
+*We all have secrets, and now you can share these with your favourite neural network* 🤫
+
+[gaborvecsei/Neural-Network-Steganography - Code and notebooks for the experiments](https://github.com/gaborvecsei/Neural-Network-Steganography)
 
 Steganography is the practice of concealing a message within another message or a physical object [*[1]*](#references).
 Hiding a message in a picture, or a picture within another picture are good examples on how you can break down the
-two entites (base image and secret) and slightly alter the base data to hide your secret. The idea, is that you can make really small
+two entites (what we can call *base data* and *secret data*) and slightly alter the base to hide your secret.
+The idea, is that you can make really small
 modifications to the base which is usually impossible to spot with your eyes and those modifications contain what you
-wanted to hide. Imagine increasing every $R$ value from the $(R, G, B)$ representation of the image with 1 if $R &lt; 255$.
-The result is a brand new image where you've hidden your secret, and still you will hardly be able to tell them apart. 
+wanted to hide. 
 
-This idea is the same with neural networks as a NN can contain millions of parameters which we can smartly modify to
+> Imagine increasing every $R$ value from the $(R, G, B)$ representation of the image with $1$ if $R &lt; 255$.
+> The result is a brand new image where you've hidden your "secret", and still you will hardly be able to tell them apart. 
+
+The idea is the same with neural networks as a NN can contain millions of parameters which we can smartly modify to
 embed some secrets.
 This is what we can read about in the publication *"EvilModel: Hiding Malware Inside of Neural Network Models"* [*[2]*](#references)
 which I wanted to test with my own implementation.
 
-[gaborvecsei/Neural-Network-Steganography - Code and notebooks for the experiments](https://github.com/gaborvecsei/Neural-Network-Steganography)
-
 # Floating-Points and how to modify them
 
 In computer science, we are only approximating real numbers as you'd need infinite bits to represent a real number
-with infinite precision. This is why we are using floating-points numbers with which we can represent these numbers
+with infinite precision. This is why we are using the floating-point numbers with which we can represent these numbers
 with a fixed number of bits to a certain precision and range.
-In this post I will be using the single precision, 32 bit representation (`float32`).
+In this post I will be using the single precision, 32 bit representation (`float32`), but you could easily extend the theory
+for representations with more/fewer bits.
 
 ## Structure of a FP32
 
-I won't cover the whole story around floating points, you can read it up here: [*[3]*](#references), but as a quick refresher, this is what you need to know for these experiments.
+I won't cover the whole story around floating points, there are several well written articles, you can read it up here: [*[3]*](#references),
+but as a quick refresher, this is what you need to know for these experiments.
 We can split the binary representation into 3 parts and then use these to calculate the value of the number:
-- *sing* - the 1st bit
-- *exponent* - 8 bits after the sign bit
-- *fraction* - 23 bits after the last bit of the exponent
+- *sing* ($s$) - the 1st bit
+- *exponent* ($E$) - 8 bits after the sign bit
+- *fraction* ($F$) - 23 bits after the last bit of the exponent
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png" width="400" alt="">
 
-(source: [*[3]*](#references))
+(*LSB* visualization, source: [*[3]*](#references))
 
 Modifying these binary representations allows us to store some data while giving up some precision what we can control by
-the decision how many and which bits to change in the original representation.
+the decision how many and which bits to change in the original bit sequence.
+The formula to calculate the real number is from which we can see that by modifying $F$ we can do the least harm [*[6]*](#references):
+
+$x = (-1)^s \times (1.F) \times 2^{E-127}$
 
 ## Floating-Point experiment
 
 As an experiment, let's say, we would like to modify the number $x=-69.420$. I wrote a little utility class [*[4]*](#references) with which we
 can easily experiment with the representation.
 Let's take $x$, convert to the mentioned
-binary representation: $11000010100010101101011100001010$ and then calculate it's value again: $-69.41999816894531$.
-It's not the same as the original one... and yeah that's the whole point, the difference is $1.8310546892053026e-06$.
+binary representation: $11000010100010101101011100001010$ and then calculate it's value again with the formula: $-69.41999816894531$.
+It's not the same as the original one...🤔 and yeah that's the whole point, the difference is $1.8310546892053026e-06$.
+And kids, this is why we are not doing ~~drugs~~ equality checks with floats.
 
-Next we can take $16bits$ from the fraction of $x$ and play around with it, "simulate" how the value changes as we change these bits.
+As nother experiment we can take $16bits$ from the fraction of $x$ and play around with it, "simulate" how the value changes as we change these bits.
 Randomly doing this $1000$ times yields the following plot:
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/nn_steganography/fp32_modification_randomly.png" width="400" alt="">
 
 But of course we can just set all bits to $0$s and $1$s and then we have the "range of change".
+The wider this range is the more afraid we should be when modifying the NN, as predictions can and will be altered.
+
+You can also experiment more with `float32`s just [run this notebook](https://github.com/gaborvecsei/Neural-Network-Steganography/blob/master/float_investigation.ipynb).
 
 # Hiding the secrets in Neural Networks
 
 The process is the following:
 
-0. Evaluate your NN without any modification on a test dataset
-    - Store each individual prediction not just the overall metrics (e.g. f1 score)
-1. Convert your data/secret to binary representation
-2. Calculate how many bits are needed to hide this data, then check if you have the available "storage" in your NN
-    - $storage=nbbits * nbparameters$
-    - Remember that there is a quality-quantity trade-off
-3. Go over the parameters in the network, conver to binary format, then switch the defined bits to bits from the secret
-4. Evaluate the NN again, and inspect the differences
+0. 🔎 Evaluate your NN without any modification on a test dataset
+    - Store each individual prediction not just the overall metrics (e.g. f1 score) - for more through evaluation
+1. 0️⃣1️⃣ Convert your data/secret to binary representation
+2. 🤓 Calculate how many bits are needed to hide this data, then check if you have the available "storage" in your NN
+    - $storage=\text{nb_bits} * /text{nb_parameters}$
+    - Remember that there is a quality-quantity trade-off so try to use low number of bits
+3. 🤖Go over the parameters in the network, conver to binary format, then switch the defined bits to bits from the secret
+4. 🔎 Evaluate the NN again, and inspect the differences
 
 ## Quality - Quantity trade-off
 
@@ -185,3 +196,5 @@ and evaluate a wider range of models.
 *[4]* - [Floating point investigation notebook](https://github.com/gaborvecsei/Neural-Network-Steganography/blob/master/float_investigation.ipynb)
 
 *[5]* - [How large is a piece of Malware? - SophosLabs](https://nakedsecurity.sophos.com/2010/07/27/large-piece-malware/#)
+
+*[6]* - [Single-Precision Format - ScienceDirect](https://www.sciencedirect.com/topics/computer-science/single-precision-format)
