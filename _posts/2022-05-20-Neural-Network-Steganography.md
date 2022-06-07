@@ -17,14 +17,14 @@ externalLink: false
 
 # Introduction
 
-*We all have secrets, and now you can share these with your favourite neural network* 🤫
+*We all have secrets, and now you can share these with your favorite neural network* 🤫
 
 [gaborvecsei/Neural-Network-Steganography - **Code and notebooks for the experiments**](https://github.com/gaborvecsei/Neural-Network-Steganography).
 I encourage everybody to follow the post with the code for easier and more practical understanding.
 
 Steganography is the practice of concealing a message within another message or a physical object [*[1]*](#references).
 Hiding a message in a picture, or a picture within another picture are good examples on how you can break down the
-two entites (what we can call *base data* and *secret data*) and slightly alter the base to hide your secret.
+two entities (what we can call *base data* and *secret data*) and slightly alter the base to hide your secret.
 The idea, is that you can make really small
 modifications to the base which is usually impossible to spot with your eyes and those modifications contain what you
 wanted to hide. 
@@ -73,7 +73,7 @@ binary representation: $11000010100010101101011100001010$ and then calculate it'
 It's not the same as the original one...🤔 and yeah that's the whole point, the difference is $1.8310546892053026e-06$.
 And kids, this is why we are not doing ~~drugs~~ equality checks with floats.
 
-As nother experiment we can take $16bits$ from the fraction of $x$ and play around with it, "simulate" how the value changes as we change these bits.
+As another experiment we can take $16bits$ from the fraction of $x$ and play around with it, "simulate" how the value changes as we change these bits.
 Randomly doing this $1000$ times yields the following plot:
 
 <img src="https://gaborvecsei.github.io/assets/images/blog/nn_steganography/fp32_modification_randomly.png" width="400" alt="">
@@ -93,7 +93,7 @@ The process is the following:
 2. 🤓 Calculate how many bits are needed to hide this data, then check if you have the available "storage" in your NN
     - $storage=\text{nb_bits} * \text{nb_parameters}$
     - Remember that there is a quality-quantity trade-off so try to use low number of bits
-3. 🤖Go over the parameters in the network, conver to binary format, then switch the defined bits to bits from the secret
+3. 🤖Go over the parameters in the network, convert to binary format, then switch the defined bits to bits from the secret
 4. 🔎 Evaluate the NN again, and inspect the differences
 
 ## Quality - Quantity trade-off
@@ -101,7 +101,7 @@ The process is the following:
 There is a trade-off what we need to consider when modifying bits of parameters in a neural network:
 The more precision you give up at each value the more data you can store.
 But think about what this precision means in a NN.
-You are using these parameters to perform a the forward pass and receive a prediction, and you'd like to keep this prediction as close as you can to the original one.
+You are using these parameters to perform the forward pass and receive a prediction, and you'd like to keep this prediction as close as you can to the original one.
 Worst case scenario, the outputs of the network will be so different, that you won't notice the 24 days of training what you did.
 
 As a general rule, just try to compress your data and use less bits from the fraction.
@@ -116,7 +116,7 @@ I wrote the tools to use it not just to sit on it 🦾.
 ### Parameters
 
 I used the well known `ResNet50` network trained on `ImageNet` which is easily accessible at every deep learning framework.
-But how much data can we store here? Actually... a lot, but it should not be suprising with the number of parameters.
+But how much data can we store here? Actually... a lot, but it should not be surprising with the number of parameters.
 After I decided to run the experiment, where I change $16bits$ from the *fraction* of every parameter (in every `Conv2D` layer) I could calculate the amount of data I can store.
 Here you can see the layer-wise breakdown:
 
@@ -127,7 +127,7 @@ And keep in mind that today this is an averaged size CV model.
 It would be really easy to hide a few Trojan viruses here [*[5]*](#references).
 
 We can also take a look on basic statistics for the parameters, to get a hint how much precision we need to retain, and
-these would help for any fancyer placement of the secret bits (e.g. calculate the number of bits to use for clusters on values), but I will be using a simple iterative method.
+these would help for any fancier placement of the secret bits (e.g. Calculate the number of bits to use for clusters on values), but I will be using a simple iterative method.
 
 ```
 Min: -0.7719802856445312
@@ -184,7 +184,7 @@ Changed number of predictions: 146 / 14241 | 1.0252089038691103%
 ```
 
 So we can see that almost all outputs changed slightly, and for some cases (approx. $1\%$) this resulted in a new output label.
-This is not suprising based on the maximum change values, just imagine a 3 class case where these are the original values:
+This is not surprising based on the maximum change values, just imagine a 3 class case where these are the original values:
 $[0.3, 0.34, 0.36]$ (label would be *2*) and after the modification it's: $[0.3, 0.351, 0.349]$ (where label is *1*).
 
 # Conclusion
