@@ -20,6 +20,18 @@
     <img src="https://raw.githubusercontent.com/sergiokopplin/indigo/gh-pages/assets/screen-shot.png" />
 </p>
 
+## Docker
+
+```shell
+# Build
+docker build -t site -f Dockerfile .
+
+# Run
+docker run --rm -it --entrypoint /bin/bash -p 4000:4000 -v $(pwd):/mysite site
+# Then...
+# cd /mysite && bundle exec jekyll serve --config _config.yml,_config-dev.yml
+```
+
 ## What has inside
 
 - [Jekyll](https://jekyllrb.com/), [Sass](http://sass-lang.com/) ~[RSCSS](http://rscss.io/)~ and [SVG](https://www.w3.org/Graphics/SVG/)
