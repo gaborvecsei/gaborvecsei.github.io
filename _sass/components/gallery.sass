@@ -1,0 +1,19 @@
+.image-gallery
+  display: flex
+  flex-direction: row
+  gap: 10px
+
+  @media #{$below}
+    flex-direction: column 
+
+  .column
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+.image-item
+  img
+    width: 100%
+    border-radius: 5px
+    height: 100%
+    object-fit: cover

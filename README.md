@@ -24,12 +24,10 @@
 
 ```shell
 # Build
-docker build -t site -f Dockerfile .
+docker build -t gabor_site -f Dockerfile .
 
 # Run
-docker run --rm -it --entrypoint /bin/bash -p 4000:4000 -v $(pwd):/mysite site
-# Then...
-# cd /mysite && bundle exec jekyll serve --config _config.yml,_config-dev.yml
+docker run --rm -it --entrypoint /bin/bash -p 4000:4000 -v $(pwd):/mysite gabor_site -c "cd /mysite && bundle exec jekyll serve --config _config.yml,_config-dev.yml"
 ```
 
 ## What has inside

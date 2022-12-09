@@ -26,6 +26,20 @@ layout: page
 
 {{content}}
 
+{% if page.gallery %}
+    <div class="image-gallery">
+    {% for x in page.gallery %}
+        <div class="column">
+        {% for y in x %}
+        <div class="image-item">
+            <img src="{{ y }}" alt="" oncontextmenu="return false;" />
+        </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+
 {% if site.post-advance-links contains page.category %}
     <div class="blog-navigation">
         {% if page.previous.url %}
