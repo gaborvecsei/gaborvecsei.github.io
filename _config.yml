@@ -22,7 +22,8 @@ url: https://gaborvecsei.github.io
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-analytics-google: 'UA-122222933-1'
+# TODO: this needs to be updated, as it is for the old GA, the new GA with the right ID is hardcoded
+# analytics-google: 'UA-122222933-1'
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'
