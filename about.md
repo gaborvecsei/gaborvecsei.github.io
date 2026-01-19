@@ -4,8 +4,8 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-My name is Gábor Vecsei and I run the Artificial Intelligence team at Docler Holding - With our engineers and researchers we work on novel approaches which can be used in live-streaming applications.
+My name is Gábor Vecsei and I'm the Head of AI at Byborg Enterprises. I scaled our AI organization from 3 to 30+ engineers, building production systems across computer vision, LLMs, and generative AI that power live-streaming platforms.
 
-I am the Co-Founder of [RebotKit](https://rebotkit.net) - Our mission is to reform the education and learning with our cost efficient and environmentally friendly robot builder kit where the limit is only our creativity.
+I was the Co-Founder & CTO of [RebotKit](https://rebotkit.net) (2016-2019), where we created educational robotics kits from recyclable materials and partnered with organizations like Vodafone and Magyar Telekom.
 
 Also...I love chocolate 🍫.
