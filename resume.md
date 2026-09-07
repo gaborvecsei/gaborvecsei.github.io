@@ -13,9 +13,12 @@ For a "full" `.pdf` version [contact me via LinkedIn](https://www.linkedin.com/i
 
 ## Work Experience
 
+- **VP of AI Engineering**
+    - DiffuseDrive
+    - _Mar. 2026 - Present_
 - **Head of AI** _(Lead of AI until Mar. 2025)_
   - Byborg Enterprises
-  - _Feb. 2020 - Present_
+  - _Feb. 2020 - Mar. 2026_
 - **Senior Machine Learning Engineer / Tech Lead**
   - Continental ADAS
   - _Aug. 2018 - Feb. 2020_
